@@ -1,0 +1,35 @@
+/*Heading of the registration form*/
+.head 
+{
+     font-weight: bold; 
+     font-size: 38px;
+     margin: 0px 0px 0px 0px; 
+     line-height: 120%; 
+     font-family: 'Open sans', sans-serif; 
+     padding-bottom:15px;
+}
+
+/*Jquery error text inside the field Registration Form*/
+select.error, textarea.error, input.error 
+{
+    color: rgba(247, 28, 28, 0.486);
+}
+
+/*Jquery error msg Registration Form*/
+.error
+{
+    color:#FF0000;
+}
+
+/*Materialize input field error in registration form*/
+.input-field input[type=text].error 
+{
+    border-bottom: 1px solid #FF0000;
+    box-shadow: 0 1px 0 0 #FF0000;
+}
+
+.input-field input[type=email].error 
+{
+    border-bottom: 1px solid #FF0000;
+    box-shadow: 0 1px 0 0 #FF0000;
+}
