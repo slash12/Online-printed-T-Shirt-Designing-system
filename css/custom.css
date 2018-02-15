@@ -33,3 +33,11 @@ select.error, textarea.error, input.error
     border-bottom: 1px solid #FF0000;
     box-shadow: 0 1px 0 0 #FF0000;
 }
+
+.input-field input[type=password].error 
+{
+    border-bottom: 1px solid #FF0000;
+    box-shadow: 0 1px 0 0 #FF0000;
+}
+
+

@@ -14,6 +14,15 @@ $(document).ready(function()
                             required:true,
                             minlength:5
                         },
+                        txtaddress:
+                        {
+                            required:true
+                        },
+                        txtpostalcode:
+                        {
+                            required:true,
+                            maxlength:5
+                        },
                         txtemail:
                         {
                             required:true,
@@ -22,7 +31,17 @@ $(document).ready(function()
                         txtpass:
                         {
                             required:true,
-                            minlength:8
+                            minlength:8,
+                            pwchdigit:true,
+                            pwchcon:true,
+                            pwchlletter:true,
+                            pwchuletter:true
+                        },
+                        txtcpass:
+                        {
+                            required:true,
+                            minlength:8,
+                            equalTo:"#txtpass"
                         }
                     }, 
                     messages:
@@ -37,6 +56,15 @@ $(document).ready(function()
                             required: "Enter your First Name",
                             minlength: "Enter atleast least 5 characters"
                         },
+                        txtaddress:
+                        {
+                            required:"Please Enter your Full Address"
+                        },
+                        txtpostalcode:
+                        {
+                            required:"Please Enter Your Postal Code",
+                            maxlength:"Please Enter an appropriate Value (max-character: 5)"
+                        },
                         txtemail:
                         {
                             required:"Please enter your E-mail Address",
@@ -45,7 +73,12 @@ $(document).ready(function()
                         txtpass:
                         {
                             required:"Please enter a password",
-                            minlength:"Enter atleast least 5 characters"
+                            minlength:"Enter atleast least 8 characters",
+                            pwchdigit:"Please enter atleast one digit",
+                            pwchcon:"Please enter atleast one symbol (e.g =!\-@._*) ",
+                            pwchlletter:"Please enter atleast one Lowercase letter",
+                            pwchuletter:"Please enter atleast one Uppercase letter"
+
                         }
                         
                     },
@@ -62,6 +95,26 @@ $(document).ready(function()
                             error.insertAfter(element);
                         }
                     }
-
+                    
                 });
+
+                //Password check contant special value
+                $.validator.addMethod("pwchcon", function(value) {
+                    return /[=!\-@._*]/.test(value) 
+                 });
+
+                //Password check lowercase letter
+                $.validator.addMethod("pwchlletter", function(value) {
+                    return /[a-z]/.test(value);
+                 });
+
+                //Password check for digit 
+                $.validator.addMethod("pwchdigit", function(value) {
+                    return /\d/.test(value) 
+                 });
+
+                //Password check for uppercase letter
+                $.validator.addMethod("pwchuletter", function(value) {
+                    return /[A-Z]/.test(value) 
+                 });
         });
