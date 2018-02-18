@@ -28,6 +28,11 @@ $(document).ready(function()
                             required:true,
                             email:true
                         },
+                        txtusername:
+                        {
+                            required:true,
+                            minlength:5
+                        },
                         txtpass:
                         {
                             required:true,
@@ -69,6 +74,11 @@ $(document).ready(function()
                         {
                             required:"Please enter your E-mail Address",
                             email:"Please enter a valid E-mail Address"
+                        },
+                        txtusername:
+                        {
+                            required:"Please Enter your username",
+                            minlength:"Please Enter atleast 5 Characters"
                         },
                         txtpass:
                         {
@@ -118,3 +128,5 @@ $(document).ready(function()
                     return /[A-Z]/.test(value) 
                  });
         });
+
+        

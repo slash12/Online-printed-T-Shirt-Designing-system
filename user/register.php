@@ -7,10 +7,10 @@
         <title>Register</title>
 
         <!-- Stylesheets -->
-        <link rel="stylesheet" href="css/materialize.min.css">
+        <link rel="stylesheet" href="../css/materialize.min.css">
 
         <!--Custom Stylesheets -->
-        <link rel="stylesheet" href="css/custom.css">
+        <link rel="stylesheet" href="../css/custom.css">
         <style>
             .modal 
             {
@@ -18,8 +18,8 @@
             } 
         </style>
         
-        <script type="text/javascript" src="js/jquery.min.js"></script>
-        <script type="text/javascript" src="js/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="../js/jquery.min.js"></script>
+        <script type="text/javascript" src="../js/jquery.validate.min.js"></script>
         <script>
         //To open up the modal
             $(document).ready(function()
@@ -333,6 +333,40 @@
                             </div>
                         </div>
 
+                    <!-- Username -->
+                    <script>
+                        //Check if username already exist
+                        function chckUser(value)
+                        {
+                            $.ajax({
+                                type:"POST",
+                                url:"checkUsername.php",
+                                data:"txtusername="+value,
+                                success:function(data)
+                                {
+                                    //$("#msg").html(data);
+                                    if(data == "false")
+                                    {
+                                        document.getElementById('msg').innerHTML = "Invalid Username";
+                                        document.getElementById('btnregissub').classList.add("disabled");
+                                        
+                                    }
+                                    if(data == "true")
+                                    {
+                                        document.getElementById('msg').innerHTML = "Valid Username";
+                                        document.getElementById('btnregissub').classList.remove("disabled");
+                                    }
+                                }
+                            });
+                        }
+                    </script>
+                    <div class="row">
+                            <div class="input-field col s6">
+                                <input id="txtusername" name="txtusername" type="text" class="tooltipped" data-position="right" data-delay="50" data-tooltip="e.g nadda" onkeyup="chckUser(this.value)">
+                                <label for="email">Username</label><div id="msg"></div>
+                            </div>
+                    </div>
+
                     <!-- Password -->
                     <div class="row">
                             <div class="input-field col s6">
@@ -357,10 +391,10 @@
                     </div>
                 </form>
             <!-- </div>     -->
-    <script type="text/javascript" src="js/custom.js"></script>
+    <script type="text/javascript" src="../js/custom.js"></script>
 
       
-        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script type="text/javascript" src="../js/materialize.min.js"></script>
         
     </body>
 </html>
