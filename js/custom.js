@@ -21,7 +21,8 @@ $(document).ready(function()
                         txtpostalcode:
                         {
                             required:true,
-                            maxlength:5
+                            maxlength:5,
+                            minlength:5
                         },
                         txtemail:
                         {
@@ -68,7 +69,8 @@ $(document).ready(function()
                         txtpostalcode:
                         {
                             required:"Please Enter Your Postal Code",
-                            maxlength:"Please Enter an appropriate Value (max-character: 5)"
+                            maxlength:"Please Enter an appropriate Value (max-character: 5)",
+                            minlength:"Please Enter atleast 5 Characters (min-character: 5)"
                         },
                         txtemail:
                         {

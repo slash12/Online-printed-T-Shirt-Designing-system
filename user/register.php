@@ -6,11 +6,16 @@
 
         <title>Register</title>
 
-        <!-- Stylesheets -->
-        <link rel="stylesheet" href="../css/materialize.min.css">
+        <!--Materialize icons-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
         <!--Custom Stylesheets -->
         <link rel="stylesheet" href="../css/custom.css">
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="../css/materialize.min.css">
+
+        
         <style>
             .modal 
             {
@@ -338,6 +343,7 @@
                         //Check if username already exist
                         function chckUser(value)
                         {
+                            
                             $.ajax({
                                 type:"POST",
                                 url:"checkUsername.php",
@@ -347,14 +353,23 @@
                                     //$("#msg").html(data);
                                     if(data == "false")
                                     {
-                                        document.getElementById('msg').innerHTML = "Invalid Username";
-                                        document.getElementById('btnregissub').classList.add("disabled");
-                                        
+                                        if(value.length > 4)
+                                        {
+                                            document.getElementById('msg').innerHTML = "<span style='color:red;'>Invalid Username</span> <i class='material-icons' style='color:Orange;'>warning</i>";
+                                            document.getElementById('btnregissub').classList.add("disabled");
+                                            document.getElementById('txtusername').style.borderBottom="1px solid #FF0000";
+                                            document.getElementById('txtusername').style.boxShadow="0 1px 0 0 #FF0000";
+                                        }
                                     }
                                     if(data == "true")
                                     {
-                                        document.getElementById('msg').innerHTML = "Valid Username";
-                                        document.getElementById('btnregissub').classList.remove("disabled");
+                                        if(value.length > 4)
+                                        {
+                                            document.getElementById('msg').innerHTML = "<span style='color:green;'>Valid Username</span><i class='material-icons' style='color:green;'>done</i>";
+                                            document.getElementById('btnregissub').classList.remove("disabled");
+                                            document.getElementById('txtusername').style.borderBottom="";
+                                            document.getElementById('txtusername').style.boxShadow="";
+                                        }
                                     }
                                 }
                             });

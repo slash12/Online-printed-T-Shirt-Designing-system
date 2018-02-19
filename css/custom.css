@@ -12,7 +12,7 @@
 /*Jquery error text inside the field Registration Form*/
 select.error, textarea.error, input.error 
 {
-    color: rgba(247, 28, 28, 0.486);
+    color:black;
 }
 
 /*Jquery error msg Registration Form*/
@@ -39,5 +39,7 @@ select.error, textarea.error, input.error
     border-bottom: 1px solid #FF0000;
     box-shadow: 0 1px 0 0 #FF0000;
 }
+
+
 
 
