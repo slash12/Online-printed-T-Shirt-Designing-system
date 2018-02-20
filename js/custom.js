@@ -7,12 +7,10 @@ $(document).ready(function()
                         txtlname:
                         {
                             required:true,
-                            minlength:5
                         },
                         txtfname:
                         {
                             required:true,
-                            minlength:5
                         },
                         txtaddress:
                         {
@@ -55,12 +53,10 @@ $(document).ready(function()
                         txtlname:
                         {
                             required: "Enter your Last Name",
-                            minlength: "Enter atleast least 5 characters"
                         },
                         txtfname:
                         {
                             required: "Enter your First Name",
-                            minlength: "Enter atleast least 5 characters"
                         },
                         txtaddress:
                         {

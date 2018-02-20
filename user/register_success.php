@@ -1,5 +1,8 @@
 <?php 
+    use PHPMailer\PHPMailer\PHPMailer; 
+    use PHPMailer\PHPMailer\Exception;
     require('../includes/connect.php');
+    
     
 
     if($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -13,29 +16,60 @@
         $username = mysqli_real_escape_string($dbc ,trim($_POST['txtusername']));
         $password = mysqli_real_escape_string($dbc, md5(trim($_POST['txtpass'])));
 
-        $register_query = "INSERT INTO tbl_user(l_name, f_name, country, address, postal_code, email, password) VALUES('$lname', '$fname', '$country', '$address', '$postal_code', '$email', '$password');";
+        $token = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM123456789!$/()*";
+        $token = str_shuffle($token);
+        $token = substr($token, 0, 10);
+       
+
+        $register_query = "INSERT INTO tbl_user(l_name, f_name, country, address, postal_code, e_mail, username,password, isEmailConfirmed, token) VALUES('$lname', '$fname', '$country', '$address', '$postal_code', '$email', '$username','$password', '0', '$token');";
 
         $register_query_run = mysqli_query($dbc, $register_query);
 
         if($register_query_run)
         {
-            echo "Store in the db";
+
+            include_once("phpMailer/PHPMailer.php");
+            include_once("phpMailer/Exception.php");
+            include_once("phpMailer/SMTP.php");
+            $mail = new PHPMailer();
+            //$mail->SMTPDebug = 2;                                 // Enable verbose debug output
+            $mail->isSMTP();                                      // Set mailer to use SMTP
+            $mail->Host = 'smtp.gmail.com;';                    // Specify main and backup SMTP servers
+            $mail->SMTPAuth = true;                               // Enable SMTP authentication
+            $mail->SMTPSecure = false;
+            $mail->Username = 'testappui357@gmail.com';                 // SMTP username
+            $mail->Password = 'qwert1234';                           // SMTP password
+            //$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+            $mail->Port = 25;                       
+            $mail->setFrom('testappui357@gmail.com', 'Nadda');
+            $mail->addAddress('nadeemshb_12@hotmail.com', 'Nad User');
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = 'Here is the subject';
+            $mail->Body    = "
+                Please Click on the link below: <br><br>
+                <a href=\"http://localhost:8001/dissertation/Online-printed-T-Shirt-Designing-system/user/emailVerified.php?email=$email&token=$token\">Click Here</a>    
+            ";
+            
+
+            if($mail->send())
+            {
+                echo "You have been registered. Please check your E-mail to activate your account.";
+            }
+            else
+            {
+                echo $mail->ErrorInfo;
+            }
+            //header('Location: register.php');
         }
         else
         {
-            echo "zafr la pan run pff";
+            echo "qry not run";
         }
 
-
-        echo $password;
     }
-    else
-    {
-        echo "wrong";
-    } 
 ?>
 
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />

@@ -331,10 +331,38 @@
                     </div>
 
                     <!-- E-mail -->
+                    <script>
+                        //Check if email already exist
+                        function chckEmail(value)
+                        {
+                            $.ajax({
+                                type:"POST",
+                                url:"checkEmail.php",
+                                data:"txtemail="+value,
+                                success:function(data)
+                                {
+                                    if(data == "false")
+                                    {
+                                            document.getElementById('msg1').innerHTML = "<span style='color:red;'>Email Already Existed</span> <i class='material-icons' style='color:Orange;'>warning</i>";
+                                            document.getElementById('btnregissub').classList.add("disabled");
+                                            document.getElementById('txtemail').style.borderBottom="1px solid #FF0000";
+                                            document.getElementById('txtemail').style.boxShadow="0 1px 0 0 #FF0000";
+                                    }
+                                    if(data == "true")
+                                    {
+                                            document.getElementById('msg1').innerHTML = "<span style='color:green;'>Valid E-mail Address</span><i class='material-icons' style='color:green;'>done</i>";
+                                            document.getElementById('btnregissub').classList.remove("disabled");
+                                            document.getElementById('txtemail').style.borderBottom="";
+                                            document.getElementById('txtemail').style.boxShadow="";
+                                    }
+                                }
+                            });
+                        }
+                    </script>
                         <div class="row">
                             <div class="input-field col s6">
-                                <input id="txtemail" name="txtemail" type="email" placeholder="tds@example.com">
-                                <label for="email">E-mail</label>
+                                <input id="txtemail" name="txtemail" type="email" placeholder="tds@example.com" onkeyup="chckEmail(this.value)">
+                                <label for="email">E-mail</label><div id="msg1"></div>
                             </div>
                         </div>
 
